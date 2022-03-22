@@ -9,8 +9,8 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-# from orders.models import Order
-# from orders.views import user_orders
+from orders.models import Order
+from orders.views import user_orders
 from store.models import Product
 
 from .forms import RegistrationForm, UserAddressForm, UserEditForm
@@ -38,9 +38,9 @@ def add_to_wishlist(request, id):
 
 @login_required
 def dashboard(request):
-    # orders = user_orders(request)
-    # context = {"section": "profile", "orders": orders}
-    context = {"section": "profile"}
+    orders = user_orders(request)
+    context = {"section": "profile", "orders": orders}
+    # context = {"section": "profile"}
     return render(request, "frontend/account/dashboard/dashboard.html", context)
 
 
@@ -169,8 +169,8 @@ def set_default(request, id):
     return redirect("account:addresses")
 
 
-# @login_required
-# def user_orders(request):
-#     user_id = request.user.id
-#     orders = Order.objects.filter(user_id=user_id).filter(billing_status=True)
-#     return render(request, "frontend/account/dashboard/user_orders.html", {"orders": orders})
+@login_required
+def user_orders(request):
+    user_id = request.user.id
+    orders = Order.objects.filter(user_id=user_id).filter(billing_status=True)
+    return render(request, "frontend/account/dashboard/user_orders.html", {"orders": orders})
