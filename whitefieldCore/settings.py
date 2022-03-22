@@ -186,3 +186,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_RECEIVING_USER = ['support@neurosoftech.org'] # email on which you will receive messages sent from website
+
+
+AUTH_USER_MODEL = "account.Customer"
