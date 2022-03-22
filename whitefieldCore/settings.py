@@ -177,8 +177,12 @@ BASKET_SESSION_ID = "basket"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = "account.Customer"
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login/'
 
 #for contact us give your gmail id and password
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_USE_TLS = True
@@ -188,4 +192,3 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_RECEIVING_USER = ['support@neurosoftech.org'] # email on which you will receive messages sent from website
 
 
-AUTH_USER_MODEL = "account.Customer"
