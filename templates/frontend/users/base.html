@@ -1,0 +1,570 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'userassets/user.css' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        if (localStorage.getItem('dark-mode') == 'true' || !('dark-mode' in localStorage)) {
+            document.querySelector('html').classList.add('dark');
+        } else {
+            document.querySelector('html').classList.remove('dark');
+        }        
+        </script>
+</head>
+<body>
+    
+    <body class="pa dh ly pj me mw pk">
+
+        <!-- Page wrapper -->
+        <div class="uh fp ao lu">
+    
+            <!-- Site header -->
+            <header class="ii au ib"> 
+                <div class="ax ss ht yo"> 
+                    <div class="uh fm fw ae"> 
+                        <div class="fr om"> 
+                            <a class="ul" href="index-2.html" aria-label="Cruip"> 
+                                <svg class="ap uj" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"> 
+                                    <defs> <linearGradient x1="26%" y1="100%" x2="100%" y2="100%" id="logo_a"> <stop stop-color="#3ABAB4" offset="0%"></stop> <stop stop-color="#7F9CF5" offset="100%"></stop> </linearGradient> <linearGradient x1="26%" y1="100%" x2="100%" y2="100%" id="logo_b"> <stop stop-color="#3ABAB4" offset="0%"></stop> <stop stop-color="#3ABAB4" stop-opacity="0" offset="100%"></stop> </linearGradient> </defs> 
+                                    <path d="M32 16h-8a8 8 0 10-16 0H0C0 7.163 7.163 0 16 0s16 7.163 16 16z" fill="url(#logo_a)"></path> <path d="M32 16c0 8.837-7.163 16-16 16S0 24.837 0 16h8a8 8 0 1016 0h8z" fill="url(#logo_b)"></path> 
+                                </svg> 
+                            </a> 
+                        </div> 
+                        <nav class="uv bn bp"> 
+                            <ul class="uh fi fd fm pv"> 
+                                <li> 
+                                    <a class="text-gray-600 vp dark--text-gray-300 ga hh ho uh fm d_ dz vr" href="about.html">About</a> 
+                                </li> 
+                                <li> 
+                                    <a class="text-gray-600 vp dark--text-gray-300 ga hh ho uh fm d_ dz vr" href="blog.html">Blog</a> 
+                                </li> 
+                                <li> 
+                                    <a class="text-gray-600 vp dark--text-gray-300 ga hh ho uh fm d_ dz vr" href="testimonials.html">Testimonials</a> 
+                                </li> 
+                                <li class="is" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false"> 
+                                    <a class="text-gray-600 vp dark--text-gray-300 ga hh ho uh fm d_ dz vr" href="#0" aria-haspopup="true" :aria-expanded="open" @focus="open = true" @focusout="open = false" @click.prevent=""> Resources 
+                                        <svg class="aa ug cx dn fa og fr" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"> 
+                                            <path d="M10.28 4.305L5.989 8.598 1.695 4.305A1 1 0 00.28 5.72l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z"></path> 
+                                        </svg> 
+                                    </a> 
+                                    <ul class="fs ii id if av ly mn rl ho od lh" x-show="open" x-transition:enter="d_ vi vt nv" x-transition:enter-start="db nf" x-transition:enter-end="opacity--100 nb" x-transition:leave="d_ vi vt" x-transition:leave-start="opacity--100" x-transition:leave-end="db" x-cloak=""> 
+                                        <li> 
+                                            <a class="pc text-gray-600 dark--text-gray-400 vh gf uh ho ht px" href="help.html" @focus="open = true" @focusout="open = false">Help center</a> 
+                                        </li> 
+                                        <li> 
+                                            <a class="pc text-gray-600 dark--text-gray-400 vh gf uh ho ht px" href="404.html" @focus="open = true" @focusout="open = false">404</a> 
+                                        </li> 
+                                    </ul> 
+                                </li> 
+                            </ul> 
+                            <div class="form-switch uh fp fb sx"> 
+                                <input type="checkbox" name="light-switch" id="light-switch-desktop" class="light-switch it"> 
+                                <label class="is" for="light-switch-desktop"> 
+                                    <span class="is ce co cv mf mb rc iw" aria-hidden="true"></span> 
+                                    <svg class="ii io" width="44" height="24" viewBox="0 0 44 24" xmlns="http://www.w3.org/2000/svg"> 
+                                        <g class="cx text-white" fill-rule="nonzero" opacity=".88"> 
+                                            <path d="M32 8a.5.5 0 00.5-.5v-1a.5.5 0 10-1 0v1a.5.5 0 00.5.5zM35.182 9.318a.5.5 0 00.354-.147l.707-.707a.5.5 0 00-.707-.707l-.707.707a.5.5 0 00.353.854zM37.5 11.5h-1a.5.5 0 100 1h1a.5.5 0 100-1zM35.536 14.829a.5.5 0 00-.707.707l.707.707a.5.5 0 00.707-.707l-.707-.707zM32 16a.5.5 0 00-.5.5v1a.5.5 0 101 0v-1a.5.5 0 00-.5-.5zM28.464 14.829l-.707.707a.5.5 0 00.707.707l.707-.707a.5.5 0 00-.707-.707zM28 12a.5.5 0 00-.5-.5h-1a.5.5 0 100 1h1a.5.5 0 00.5-.5zM28.464 9.171a.5.5 0 00.707-.707l-.707-.707a.5.5 0 00-.707.707l.707.707z"></path> 
+                                            <circle cx="32" cy="12" r="3"></circle> 
+                                            <circle fill-opacity=".4" cx="12" cy="12" r="6"></circle> 
+                                            <circle fill-opacity=".88" cx="12" cy="12" r="3"></circle> 
+                                        </g> 
+                                    </svg> 
+                                    <span class="it">Switch to light / dark version</span> 
+                                </label> 
+                            </div> 
+                            <ul class="uh fy fd fm"> 
+                                <li> 
+                                    <a class="rt text-white bg-teal-500 vu oy" href="contact.html">Request code</a> 
+                                </li> 
+                            </ul> 
+                        </nav> 
+                        
+                        <div class="up bi" x-data="{ expanded: false }"> 
+                            <div class="form-switch uh fp fb ob ow"> 
+                                <input type="checkbox" name="light-switch" id="light-switch-mobile" class="light-switch it"> 
+                                <label class="is" for="light-switch-mobile"> 
+                                    <span class="is ce co cv mf mb rc iw" aria-hidden="true"></span> 
+                                    <svg class="ii io" width="44" height="24" viewBox="0 0 44 24" xmlns="http://www.w3.org/2000/svg"> 
+                                        <g class="cx text-white" fill-rule="nonzero" opacity=".88"> 
+                                            <path d="M32 8a.5.5 0 00.5-.5v-1a.5.5 0 10-1 0v1a.5.5 0 00.5.5zM35.182 9.318a.5.5 0 00.354-.147l.707-.707a.5.5 0 00-.707-.707l-.707.707a.5.5 0 00.353.854zM37.5 11.5h-1a.5.5 0 100 1h1a.5.5 0 100-1zM35.536 14.829a.5.5 0 00-.707.707l.707.707a.5.5 0 00.707-.707l-.707-.707zM32 16a.5.5 0 00-.5.5v1a.5.5 0 101 0v-1a.5.5 0 00-.5-.5zM28.464 14.829l-.707.707a.5.5 0 00.707.707l.707-.707a.5.5 0 00-.707-.707zM28 12a.5.5 0 00-.5-.5h-1a.5.5 0 100 1h1a.5.5 0 00.5-.5zM28.464 9.171a.5.5 0 00.707-.707l-.707-.707a.5.5 0 00-.707.707l.707.707z"></path> 
+                                            <circle cx="32" cy="12" r="3"></circle> 
+                                            <circle fill-opacity=".4" cx="12" cy="12" r="6"></circle> 
+                                            <circle fill-opacity=".88" cx="12" cy="12" r="3"></circle> 
+                                        </g> 
+                                    </svg> 
+                                    <span class="it">Switch to light / dark version</span> 
+                                </label> 
+                            </div> 
+                            <button class="rv" :class="{ 'active': expanded }" @click.stop="expanded = !expanded" aria-controls="mobile-nav" :aria-expanded="expanded"> 
+                                <span class="it">Menu</span> 
+                                <svg class="ad uq cx pj vp dark--text-gray-300 ga d_ dz vr" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"> 
+                                    <rect y="4" width="24" height="2" rx="1"></rect> 
+                                    <rect y="11" width="24" height="2" rx="1"></rect> 
+                                    <rect y="18" width="24" height="2" rx="1"></rect>
+                                </svg> 
+                            </button> 
+                            <nav id="mobile-nav" class="ir ip at iy if au fe ok la ly me rl rd" @click.outside="expanded = false" @keydown.escape.window="expanded = false" x-show="expanded" x-transition:enter="d_ vi vt nv" x-transition:enter-start="db na" x-transition:enter-end="opacity--100 nm" x-transition:leave="d_ vi vt" x-transition:leave-start="opacity--100" x-transition:leave-end="db" x-cloak=""> 
+                                <div class="hp hj hq"> 
+                                    <svg class="ap uj" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"> <defs> 
+                                        <linearGradient x1="26%" y1="100%" x2="100%" y2="100%" id="menulogo_a"> <stop stop-color="#3ABAB4" offset="0%"></stop> <stop stop-color="#7F9CF5" offset="100%"></stop> 
+                                        </linearGradient> 
+                                        <linearGradient x1="26%" y1="100%" x2="100%" y2="100%" id="menulogo_b"> <stop stop-color="#3ABAB4" offset="0%"></stop> <stop stop-color="#3ABAB4" stop-opacity="0" offset="100%"></stop> 
+                                        </linearGradient> 
+                                    </defs> <path d="M32 16h-8a8 8 0 10-16 0H0C0 7.163 7.163 0 16 0s16 7.163 16 16z" fill="url(#menulogo_a)"></path> <path d="M32 16c0 8.837-7.163 16-16 16S0 24.837 0 16h8a8 8 0 1016 0h8z" fill="url(#menulogo_b)"></path> 
+                                </svg> 
+                                <ul> 
+                                    <li> 
+                                        <a class="uh text-gray-600 vp dark--text-gray-300 ga ho" href="about.html">About</a> 
+                                    </li> 
+                                    <li> 
+                                        <a class="uh text-gray-600 vp dark--text-gray-300 ga ho" href="blog.html">Blog</a> 
+                                    </li> 
+                                    <li> 
+                                        <a class="uh text-gray-600 vp dark--text-gray-300 ga ho" href="testimonials.html">Testimonials</a> 
+                                    </li> 
+                                    <li class="ho sf nz nj ld v_"> 
+                                        <span class="uh text-gray-600 dark--text-gray-400 ho">Resources</span> <ul class="hk"> 
+                                            <li> 
+                                                <a class="pc uh pv text-gray-600 vp dark--text-gray-400 ga ho" href="help.html">Help center</a> 
+                                            </li> 
+                                            <li> 
+                                                <a class="pc uh pv text-gray-600 vp dark--text-gray-400 ga ho" href="404.html">404</a> 
+                                            </li> 
+                                        </ul> 
+                                    </li> 
+                                    <li> 
+                                        <a class="pv au up fm fb nx lm ht ho sf lh text-white bg-teal-500 vu d_ dz vr" href="contact.html">Request code</a> 
+                                    </li> 
+                                </ul> 
+                            </div> 
+                        </nav> 
+                    </div> 
+                </div> 
+            </div> 
+        </header>
+    
+            <!-- Page content -->
+            <main class="fi">                
+                
+                    <section class="is nz lm v_"> 
+                        <div class="ii io uw gr ct co cv mf mp in" aria-hidden="true"></div> 
+                        <div class="is ax ss ht yo"> 
+                            <div class="hu bz"> 
+                                <div class="ak ss po hy wi"> 
+                                    <h2 class="h2 pf sm">Turn your ideas into reality in seconds</h2> 
+                                    <p class="pl text-gray-600 dark--text-gray-400">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p> 
+                                </div> 
+                                <div x-data="{ category: '1' }"> 
+                                    <div class="ud xp fx xb"> 
+                                        <div class="wm xq uh fd fb xv xg st wy"> 
+                                            <button class="xo pv hn ho ly va shadow mn go d_ dz vr lh uh fm fb xg sn wy" :class="{ 'bg-teal-500 hover--bg-teal-500 dark--bg-teal-600 dark--hover--bg-teal-600 dark--bg-opacity-25 dark--hover--bg-opacity-25': category === '1' }" @click="category = '1'"> 
+                                                <svg class="af ub fr oj" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"> 
+                                                    <path class="cx" :class="category === '1' ? 'text-teal-200 dark--text-teal-400' : 'text-teal-500 dark--text-gray-400'" d="M5 16H4a4 4 0 01-4-4v-1h2v1a2 2 0 002 2h1v2zM13 10h-1.686l-1.207-1.207L14.37 4.63a2.121 2.121 0 00-3-3L7.207 5.793 5.99 4.576 5.98 3.02 3.038.079 0 3.117 3 6h1.586l1.207 1.207L4 9l3 3 1.793-1.793L10 11.414V13l3.01 3.01 2.98-2.979L13 10z"></path> 
+                                                </svg> 
+                                                <span :class="category === '1' ? 'text-white dark--text-teal-400' : 'text-gray-600 dark--text-gray-300'">Getting Started</span> 
+                                            </button> 
+                                            <button class="xo pv hn ho ly va shadow mn go d_ dz vr lh uh fm fb xg sn wy" :class="{ 'bg-teal-500 hover--bg-teal-500 dark--bg-teal-600 dark--hover--bg-teal-600 dark--bg-opacity-25 dark--hover--bg-opacity-25': category === '2' }" @click="category = '2'"> 
+                                                <svg class="af ub fr oj" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"> 
+                                                    <path class="cx" :class="category === '2' ? 'text-teal-200 dark--text-teal-400' : 'text-teal-500 dark--text-gray-400'" d="M8 3l4 4H4zM8 13L4 9h8zM1 0h14v2H1zM1 14h14v2H1z"></path>
+                                                </svg> 
+                                                <span :class="category === '2' ? 'text-white dark--text-teal-400' : 'text-gray-600 dark--text-gray-300'">Collection list</span> 
+                                            </button> 
+                                            <button class="xo pv hn ho ly va shadow mn go d_ dz vr lh uh fm fb xg sn wy" :class="{ 'bg-teal-500 hover--bg-teal-500 dark--bg-teal-600 dark--hover--bg-teal-600 dark--bg-opacity-25 dark--hover--bg-opacity-25': category === '3' }" @click="category = '3'"> 
+                                                <svg class="af ub fr oj" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"> 
+                                                    <path class="cx" :class="category === '3' ? 'text-teal-200 dark--text-teal-400' : 'text-teal-500 dark--text-gray-400'" d="M6 0H1a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1V1a1 1 0 00-1-1zM5 5H2V2h3v3zM15 9h-5a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1zm-1 5h-3v-3h3v3zM6 9H1a1 1 0 00-1 1v5a1 1 0 001 1h5a1 1 0 001-1v-5a1 1 0 00-1-1zm-1 5H2v-3h3v3zM12.5 7a1 1 0 01-.707-.293l-2.5-2.5a1 1 0 010-1.414l2.5-2.5a1 1 0 011.414 0l2.5 2.5a1 1 0 010 1.414l-2.5 2.5A1 1 0 0112.5 7z"></path> 
+                                                </svg> 
+                                                <span :class="category === '3' ? 'text-white dark--text-teal-400' : 'text-gray-600 dark--text-gray-300'">Element Hierarchy</span> 
+                                            </button> 
+                                            <button class="xo pv hn ho ly va shadow mn go d_ dz vr lh uh fm fb xg sn wy" :class="{ 'bg-teal-500 hover--bg-teal-500 dark--bg-teal-600 dark--hover--bg-teal-600 dark--bg-opacity-25 dark--hover--bg-opacity-25': category === '4' }" @click="category = '4'"> 
+                                                <svg class="af ub fr oj" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"> 
+                                                    <path class="cx" :class="category === '4' ? 'text-teal-200 dark--text-teal-400' : 'text-teal-500 dark--text-gray-400'" d="M15.4.6c-.84-.8-2.16-.8-3 0L8.7 4.3c.73.252 1.388.68 1.916 1.244.469.515.83 1.119 1.065 1.775L15.4 3.6c.8-.84.8-2.16 0-3zM4.937 6.9c-1.2 1.2-1.4 5.7-1.4 5.7s4.4-.4 5.6-1.5a2.987 2.987 0 000-4.2 2.9 2.9 0 00-4.2 0z"></path> 
+                                                </svg> 
+                                                <span :class="category === '4' ? 'text-white dark--text-teal-400' : 'text-gray-600 dark--text-gray-300'">Styling Basics</span> 
+                                            </button> 
+                                                
+                                            <button class="xo pv hn ho ly va shadow mn go d_ dz vr lh uh fm fb xg sn wy" :class="{ 'bg-teal-500 hover--bg-teal-500 dark--bg-teal-600 dark--hover--bg-teal-600 dark--bg-opacity-25 dark--hover--bg-opacity-25': category === '5' }" @click="category = '5'"> 
+                                                <svg class="af ub fr oj" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"> 
+                                                    <path class="cx" :class="category === '5' ? 'text-teal-200 dark--text-teal-400' : 'text-teal-500 dark--text-gray-400'" d="M11 16v-5h5V0H5v5H0v11h11zM2 7h7v7H2V7z"></path> 
+                                                </svg> 
+                                                <span :class="category === '5' ? 'text-white dark--text-teal-400' : 'text-gray-600 dark--text-gray-300'">Image Field</span> 
+                                            </button> 
+                                        </div> 
+                                        <div class="wg fe ss ba xa"> 
+                                            <div class="ud bg fz"> 
+                                                <div x-show="['1'].includes(category)"> 
+                                                    <div class="is"> 
+                                                        {% comment %}
+                                                        <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01">
+                                                        
+                                                        <div class="ii io uh fp"> 
+                                                            <div class="fi uh fb fm"> 
+                                                                <a class="vv d_ dz vr" href="#0"> 
+                                                                    <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> 
+                                                                </a> 
+                                                            </div> 
+                                                            <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                <a class="pj dark--text-gray-400 pv" href="#0">Using index pages</a> 
+                                                                <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">2 Min</div> 
+                                                            </div> 
+                                                        </div> 
+                                                        {% endcomment %}
+
+                                                        <div class="flex flex-col text-center w-full mb-20">
+                                                            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Master Cleanse Reliac Heirloom</h1>
+                                                        </div>
+                                                          <div class="flex flex-wrap -m-4 text-center">
+                                                            <div class="p-4 sm:w-1/2 w-full">
+                                                              <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                                                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
+                                                                  <path d="M8 17l4 4 4-4m-4-5v9"></path>
+                                                                  <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
+                                                                </svg>
+                                                                <h2 class="title-font font-medium text-3xl text-gray-900">2.7K</h2>
+                                                                <p class="leading-relaxed">Downloads</p>
+                                                              </div>
+                                                            </div>
+                                                            <div class="p-4 sm:w-1/2 w-full">
+                                                              <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                                                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
+                                                                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+                                                                  <circle cx="9" cy="7" r="4"></circle>
+                                                                  <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
+                                                                </svg>
+                                                                <h2 class="title-font font-medium text-3xl text-gray-900">1.3K</h2>
+                                                                <p class="leading-relaxed">Users</p>
+                                                              </div>
+                                                            </div>
+                                                            <div class="p-4 sm:w-1/2 w-full">
+                                                              <div class="border-2 border-gray-200 px-4 py-6 rounded-lg">
+                                                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
+                                                                  <path d="M3 18v-6a9 9 0 0118 0v6"></path>
+                                                                  <path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"></path>
+                                                                </svg>
+                                                                <h2 class="title-font font-medium text-3xl text-gray-900">74</h2>
+                                                                <p class="leading-relaxed">Files</p>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                    </div> 
+                                                </div> 
+                                                <div x-show="['2'].includes(category)"> 
+                                                    <div class="is uh fb fm"> 
+                                                        <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01"> 
+                                                        <div class="ii io uh fp"> 
+                                                            <div class="fi uh fb fm"> <a class="vv d_ dz vr" href="#0"> 
+                                                                <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> </a> 
+                                                            </div> 
+                                                            <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                <a class="pj dark--text-gray-400 pv" href="#0">Working with content</a>
+                                                                <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">4 Min</div> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 
+                                                </div> 
+                                                <div x-show="['3'].includes(category)"> 
+                                                    <div class="is uh fb fm shadow"> 
+                                                        <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01"> 
+                                                        <div class="ii io uh fp"> 
+                                                            <div class="fi uh fb fm"> 
+                                                                <a class="vv d_ dz vr" href="#0"> 
+                                                                    <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> </a> 
+                                                                </div> 
+                                                                <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                    <a class="pj dark--text-gray-400 pv" href="#0">Using cover pages</a> 
+                                                                    <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">7 Min</div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 
+                                                    <div x-show="['4'].includes(category)"> 
+                                                        <div class="is uh fb fm shadow"> 
+                                                            <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01"> 
+                                                            <div class="ii io uh fp"> 
+                                                                <div class="fi uh fb fm"> 
+                                                                    <a class="vv d_ dz vr" href="#0"> 
+                                                                        <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> 
+                                                                    </a> 
+                                                                </div> 
+                                                                <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                    <a class="pj dark--text-gray-400 pv" href="#0">Intro to the style model</a> 
+                                                                    <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">9 Min</div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 
+                                                    <div x-show="['2', '5'].includes(category)"> 
+                                                        <div class="is uh fb fm shadow"> 
+                                                            <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01"> <div class="ii io uh fp"> 
+                                                                <div class="fi uh fb fm"> 
+                                                                    <a class="vv d_ dz vr" href="#0"> 
+                                                                        <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> 
+                                                                    </a> 
+                                                                </div> 
+                                                                <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                    <a class="pj dark--text-gray-400 pv" href="#0">Exploring collections</a> 
+                                                                    <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">12 Min</div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 
+                                                    <div x-show="['2', '3'].includes(category)"> 
+                                                        <div class="is uh fb fm shadow"> 
+                                                            <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01"> 
+                                                            <div class="ii io uh fp"> 
+                                                                <div class="fi uh fb fm"> 
+                                                                    <a class="vv d_ dz vr" href="#0"> 
+                                                                        <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> 
+                                                                    </a> 
+                                                                </div> 
+                                                                <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                    <a class="pj dark--text-gray-400 pv" href="#0">Understand hierarchy</a> 
+                                                                    <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">3 Min</div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 
+                                                    <div x-show="['2', '4'].includes(category)"> 
+                                                        <div class="is uh fb fm shadow"> 
+                                                            <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01"> <div class="ii io uh fp"> 
+                                                                <div class="fi uh fb fm"> 
+                                                                    <a class="vv d_ dz vr" href="#0"> 
+                                                                        <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> 
+                                                                    </a> 
+                                                                </div> 
+                                                                <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                    <a class="pj dark--text-gray-400 pv" href="#0">Customisations</a> 
+                                                                    <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">11 Min</div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 
+                                                    <div x-show="['3', '5'].includes(category)"> 
+                                                        <div class="is uh fb fm shadow"> 
+                                                            <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01"> <div class="ii io uh fp"> 
+                                                                <div class="fi uh fb fm"> 
+                                                                    <a class="vv d_ dz vr" href="#0"> 
+                                                                        <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> 
+                                                                    </a> 
+                                                                </div> 
+                                                                <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                    <a class="pj dark--text-gray-400 pv" href="#0">Image galleries</a> 
+                                                                    <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">6 Min</div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 
+                                                    <div x-show="['5'].includes(category)"> 
+                                                        <div class="is uh fb fm shadow"> 
+                                                            <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01"> <div class="ii io uh fp"> 
+                                                                <div class="fi uh fb fm"> 
+                                                                    <a class="vv d_ dz vr" href="#0"> 
+                                                                        <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> 
+                                                                    </a> 
+                                                                </div> 
+                                                                <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                    <a class="pj dark--text-gray-400 pv" href="#0">Sorting images</a> 
+                                                                    <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">4 Min</div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 
+                                                    <div x-show="['5'].includes(category)"> 
+                                                        <div class="is uh fb fm shadow"> 
+                                                            <img class="au" src="images/video-thumb.jpg" width="352" height="264" alt="Video thumbnail 01"> <div class="ii io uh fp"> 
+                                                                <div class="fi uh fb fm"> 
+                                                                    <a class="vv d_ dz vr" href="#0"> 
+                                                                        <img src="images/play-button.svg" width="72" height="72" alt="Play icon"> 
+                                                                    </a> 
+                                                                </div> 
+                                                                <div class="au ia hl hr ly dw me uh fw fm"> 
+                                                                    <a class="pj dark--text-gray-400 pv" href="#0">Filters</a> 
+                                                                    <div class="up hn ha pp pv text-white lw lq dark--text-teal-400 dark--bg-teal-600 dark--bg-opacity-25 lc">9 Min</div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div> 
+                                                    </div> 
+                                                </div> 
+                                            </div> 
+                                        </div> 
+                                    </div> 
+                                </div> 
+                        </div> 
+                    </section>
+                
+            </main>
+    
+            <!-- Site footer -->
+            <footer class="is"> 
+                <div class="ax ss ht yo"> 
+                    <div class="hu we nz ld v_ oh"> 
+                        <div class="in ig" aria-hidden="true"> 
+                            <svg class="ii ia if nv no op gt" width="800" height="264" fill="none" xmlns="http://www.w3.org/2000/svg"> 
+                                <circle cx="400" cy="400" r="400" fill="url(#footerglow_paint0_radial)" fill-opacity=".4"></circle> 
+                                <defs> 
+                                    <radialGradient id="footerglow_paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="rotate(90 0 400) scale(315.089)"> <stop stop-color="#3ABAB4"></stop> <stop offset="1" stop-color="#3ABAB4" stop-opacity=".01"></stop> </radialGradient> 
+                                </defs> 
+                            </svg> 
+                        </div> 
+                        <div class="ud bm fq xw sp yq"> 
+                            <div class="yd wh"> 
+                                <a class="uc" href="index-2.html" aria-label="Cruip"> 
+                                    <svg class="ap uj" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"> <defs> 
+                                        <linearGradient x1="26%" y1="100%" x2="100%" y2="100%" id="flogo_a"> <stop stop-color="#3ABAB4" offset="0%"></stop> <stop stop-color="#7F9CF5" offset="100%"></stop> </linearGradient> 
+                                        <linearGradient x1="26%" y1="100%" x2="100%" y2="100%" id="flogo_b"> <stop stop-color="#3ABAB4" offset="0%"></stop> <stop stop-color="#3ABAB4" stop-opacity="0" offset="100%"></stop> </linearGradient> 
+                                    </defs> 
+                                    <path d="M32 16h-8a8 8 0 10-16 0H0C0 7.163 7.163 0 16 0s16 7.163 16 16z" fill="url(#flogo_a)"></path> <path d="M32 16c0 8.837-7.163 16-16 16S0 24.837 0 16h8a8 8 0 1016 0h8z" fill="url(#flogo_b)"></path> 
+                                </svg> 
+                            </a> 
+                        </div> 
+                        <div class="yv wp ud fc bv fq"> 
+                            <div class="pc"> 
+                                <h6 class="pv py sw">Products</h6> 
+                                <ul> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Drag And Drop</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Visual Studio X</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Easy Content</a> 
+                                    </li> 
+                                </ul> 
+                            </div> 
+                            <div class="pc"> 
+                                <h6 class="pv py sw">Resources</h6> 
+                                <ul> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Industries and tools</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Use cases</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Blog</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Online events</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Nostrud exercitation</a> 
+                                    </li> 
+                                </ul> 
+                            </div> 
+                            <div class="pc"> 
+                                <h6 class="pv py sw">Company</h6> 
+                                <ul> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Diversity &amp; inclusion</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">About us</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Press</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Customer stories</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Online communities</a> 
+                                    </li>
+                                </ul> 
+                            </div> 
+                            <div class="pc"> 
+                                <h6 class="pv py sw">Support</h6> 
+                                <ul> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Documentation</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Tutorials &amp; guides</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Webinars</a> 
+                                    </li> 
+                                    <li class="sy"> 
+                                        <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Open-source</a> 
+                                    </li> 
+                                </ul> 
+                            </div> 
+                        </div> 
+                    </div> 
+                    <div class="bn by bb"> 
+                        <ul class="uh sm yh yz yx"> 
+                            <li> 
+                                <a class="uh fb fm text-white bg-teal-500 mj mn vd hover--bg-teal-600 lc d_ dz vr" href="#0" aria-label="Twitter"> 
+                                    <svg class="ap uj cx" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">   <path d="M24 11.5c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4 0 1.6 1.1 2.9 2.6 3.2-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H8c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4c.7-.5 1.3-1.1 1.7-1.8z"></path> 
+                                    </svg> 
+                                </a> 
+                            </li> 
+                            <li class="od"> 
+                                <a class="uh fb fm text-white bg-teal-500 mj mn vd hover--bg-teal-600 lc d_ dz vr" href="#0" aria-label="Github"> 
+                                    <svg class="ap uj cx" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"> <path d="M16 8.2c-4.4 0-8 3.6-8 8 0 3.5 2.3 6.5 5.5 7.6.4.1.5-.2.5-.4V22c-2.2.5-2.7-1-2.7-1-.4-.9-.9-1.2-.9-1.2-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.3 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8.6-.2 1.3-.3 2-.3s1.4.1 2 .3c1.5-1 2.2-.8 2.2-.8.4 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.7-3.7 3.9.3.4.6.9.6 1.6v2.2c0 .2.1.5.6.4 3.2-1.1 5.5-4.1 5.5-7.6-.1-4.4-3.7-8-8.1-8z"></path> </svg> 
+                                </a> 
+                            </li> 
+                            <li class="od"> 
+                                <a class="uh fb fm text-white bg-teal-500 mj mn vd hover--bg-teal-600 lc d_ dz vr" href="#0" aria-label="Facebook"> 
+                                    <svg class="ap uj cx" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"> <path d="M14.023 24L14 17h-3v-3h3v-2c0-2.7 1.672-4 4.08-4 1.153 0 2.144.086 2.433.124v2.821h-1.67c-1.31 0-1.563.623-1.563 1.536V14H21l-1 3h-2.72v7h-3.257z"></path> </svg> 
+                                </a> 
+                            </li> 
+                            <li class="od"> 
+                                <a class="uh fb fm text-white bg-teal-500 mj mn vd hover--bg-teal-600 lc d_ dz vr" href="#0" aria-label="Instagram"> 
+                                    <svg class="ap uj cx" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"> 
+                                        <circle cx="20.145" cy="11.892" r="1"></circle> 
+                                        <path d="M16 20c-2.206 0-4-1.794-4-4s1.794-4 4-4 4 1.794 4 4-1.794 4-4 4zm0-6c-1.103 0-2 .897-2 2s.897 2 2 2 2-.897 2-2-.897-2-2-2z"></path> <path d="M20 24h-8c-2.056 0-4-1.944-4-4v-8c0-2.056 1.944-4 4-4h8c2.056 0 4 1.944 4 4v8c0 2.056-1.944 4-4 4zm-8-14c-.935 0-2 1.065-2 2v8c0 .953 1.047 2 2 2h8c.935 0 2-1.065 2-2v-8c0-.935-1.065-2-2-2h-8z"></path> 
+                                    </svg> 
+                                </a> 
+                            </li> 
+                            <li class="od"> 
+                                <a class="uh fb fm text-white bg-teal-500 mj mn vd hover--bg-teal-600 lc d_ dz vr" href="#0" aria-label="Linkedin"> 
+                                    <svg class="ap uj cx" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"> 
+                                        <path d="M23.3 8H8.7c-.4 0-.7.3-.7.7v14.7c0 .3.3.6.7.6h14.7c.4 0 .7-.3.7-.7V8.7c-.1-.4-.4-.7-.8-.7zM12.7 21.6h-2.3V14h2.4v7.6h-.1zM11.6 13c-.8 0-1.4-.7-1.4-1.4 0-.8.6-1.4 1.4-1.4.8 0 1.4.6 1.4 1.4-.1.7-.7 1.4-1.4 1.4zm10 8.6h-2.4v-3.7c0-.9 0-2-1.2-2s-1.4 1-1.4 2v3.8h-2.4V14h2.3v1c.3-.6 1.1-1.2 2.2-1.2 2.4 0 2.8 1.6 2.8 3.6v4.2h.1z"></path> 
+                                    </svg> 
+                                </a> 
+                            </li> 
+                        </ul> 
+                        <div class="pc yp di sw yx"> 
+                            <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Terms</a> · <a class="text-gray-600 dark--text-gray-400 vd d_ dz vr" href="#0">Privacy Policy</a> 
+                        </div> 
+                        <div class="text-gray-600 dark--text-gray-400 pc ov">© 2020 Appy. All rights reserved.</div> 
+                    </div> 
+                </div> 
+            </div> 
+        </footer>
+    </div>
+    
+    <!-- <script src="main.bff24adf2375a62a4452.js"></script> -->
+    <script src="{% static 'userassets/user.js' %}"></script>
+    
+    <script async src='https://www.googletagmanager.com/gtag/js?id=UA-125021779-1'></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-125021779-1', { 'anonymize_ip': true });
+    </script>
+    <script>
+        console.log("%cImportant!", "color: blue; font-size: x-large");
+        console.log("%cThe page you are viewing is for demo purposes only. CSS and HTML have been minified and class names have been shortened to improve the page load time. Download our templates from https://cruip.com/ 😉", "font-size: large");
+    </script>
+    <script>
+        const pagesList = [
+            {"name":"Home","url":"https://preview.cruip.com/appy/index.html","active":true},
+            {"name":"About","url":"https://preview.cruip.com/appy/about.html","active":false},
+            {"name":"Blog","url":"https://preview.cruip.com/appy/blog.html","active":false},
+            {"name":"Blog Post","url":"https://preview.cruip.com/appy/blog-post.html","active":false},{"name":"Testimonials","url":"https://preview.cruip.com/appy/testimonials.html","active":false},{"name":"Help center","url":"https://preview.cruip.com/appy/help.html","active":false},
+            {"name":"404","url":"https://preview.cruip.com/appy/404.html","active":false},
+            {"name":"Contact","url":"https://preview.cruip.com/appy/contact.html","active":false}
+        ];if(window != top)
+            {window.parent.postMessage(pagesList, "https://cruip.com/")};
+    </script>
+    
+</body>
+</html>

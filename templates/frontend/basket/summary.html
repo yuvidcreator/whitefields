@@ -1,0 +1,515 @@
+{% extends 'frontend/base.html' %}{% load static %} {% block title %}Buy New Collections of Dairy Products{% endblock title %} 
+{% block style %}
+<style>
+.element.style {
+    display: 'visibility';
+}
+
+.select {
+    color: #000000;
+}
+</style>
+{% endblock style %} 
+
+{% block content %}
+    <!--Hero Section-->
+    <div class="hero-section hero-background">
+        <h1 class="page-title">Cart Summary</h1>
+    </div>
+
+    <!--Navigation section-->
+    <div class="container">
+        <nav class="biolife-nav">
+            <ul>
+                <li class="nav-item"><a href="{% url 'store:store_home' %}" class="permal-link">Home</a></li>    <li class="nav-item"><span class="current-page">Cart</span></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="page-contain shopping-cart">
+
+        <!-- Main content -->
+        <div id="main-content" class="main-content">
+            <div class="container">
+
+                <!--Top banner-->
+                {% comment %}
+                {% if basket|length == 0 %}
+                <div class="top-banner background-top-banner-for-shopping min-height-346px">
+                    <h3 class="col-12">Your basket is empty</h3>
+                    <div class="cart_item wrap-buttons">
+                        <div class="wrap-btn-control">
+                            <a href="{% url 'store:store_home' %}" class="btn" style="color: aliceblue;">Back to Shop</a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="top-banner background-top-banner-for-shopping min-height-346px">
+                    <h3 class="title">Save ₹50!*</h3>
+                    <p class="subtitle">Save ₹50 when you open an account online & spen ₹50 on your first online purchase to day</p>
+                    <ul class="list">
+                        <li>
+                            <div class="price-less">
+                                <span class="desc">Purchase amount</span>
+                                <span class="cost">₹0.00</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price-less">
+                                <span class="desc">Credit on billing statement</span>
+                                <span class="cost">₹0.00</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="price-less sum">
+                                <span class="desc">Cost affter statemen credit</span>
+                                <span class="cost">₹0.00</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="btns">
+                        <a href="#" class="btn">Open Account</a>
+                        <a href="#" class="btn">Learn more</a>
+                    </p>
+                </div>
+                {% endcomment %}
+
+
+                {% if basket|length == 0 %}
+                <a href="{% url 'store:store_home' %}" class="btn checkout">Back to Shop</a>
+                {% else %}
+
+                <!--Cart Table-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                            <h3 class="box-title">Your cart items</h3>
+                            <form class="shopping-cart-form product-item" action="#" method="post">
+                                {% csrf_token %}
+                                <table class="shop_table cart-form">
+                                    <thead>
+                                    <tr>
+                                        <th class="product-name">Product Name</th>
+                                        <th class="product-quantity">Price</th>
+                                        <th class="product-quantity">Quantity</th>
+                                        <th class="product-subtotal">Update</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in basket %}
+                                    {% with product=item.product %}
+                                    <tr class="cart_item" data-index="{{product.id}}">
+                                        <td class="product-thumbnail" data-title="Product Name">
+                                            {% for image in product.product_image.all %}
+                                            <a class="prd-thumb" href="{{item.product.get_absolute_url}}">
+                                                <figure><img width="113" height="113" src="{{ image.image.url }}" alt="shipping cart"></figure>
+                                            </a>
+                                            {% endfor %}
+                                            <a class="prd-name" href="{{item.product.get_absolute_url}}">{{product.title}}</a>
+                                            
+                                        </td>
+                                       
+                                        <td class="product-price" data-title="Price">
+                                            <div class="price price-contain">
+                                                <ins><span class="price-amount"><span class="currencySymbol">₹</span>{{product.discount_price}}</span></ins>
+                                                <del><span class="price-amount"><span class="currencySymbol">₹</span>{{product.regular_price}}</span></del>
+                                            </div>
+                                        </td>
+                                        
+                                        <td class="product-price" for="select" data-title="Price">
+                                            {% comment %}
+                                            <div class="quantity-box type1">
+                                                <div class="qty-input">
+                                                    <input type="text" name="qty4" value="{{item.qty}}" selected value="1" data-max_value="4" data-min_value="1" data-step="1">
+                                                    <input type="text" id="select{{product.id}}" name="select" name="qty12554" value="1" data-max_value="20" data-min_value="1" data-step="1">
+                                                    <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
+                                                    <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="product-price">
+                                                <span class="title" for="select">Qty</span>
+                                                <select id="select{{product.id}}" name="select" class="updateqty">
+                                                    <option class="price price-contain">Select Quantity</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                </select>
+                                            </div>
+                                            {% endcomment %}
+                                            <label for="select">Qty</label>
+                                            <select id="select{{product.id}}" class="updateqty">
+                                              <option value="">{{item.qty}}</option>
+                                              <option value="">1</option>
+                                              <option value="">2</option>
+                                              <option value="">3</option>
+                                              <option value="">4</option>
+                                            </select>
+                                            
+                                            
+                                        </td>
+                                        <td class="product-subtotal" data-title="Total">
+                                            <div class="action">
+                                                <a href="#" class="edit update-button" id="update-button" data-index="{{product.id}}">Update<i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                <a href="#" class="remove delete-button" id="delete-button" data-index="{{product.id}}">Delete<i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endwith %}
+                                    {% endfor %}
+
+                                    {% comment %}
+                                    <tr class="cart_item">
+                                        <td class="product-thumbnail" data-title="Product Name">
+                                            <a class="prd-thumb" href="#">
+                                                <figure><img width="113" height="113" src="assets/images/shippingcart/pr-02.jpg" alt="shipping cart"></figure>
+                                            </a>
+                                            <a class="prd-name" href="#">National Fresh Fruit</a>
+                                            <div class="action">
+                                                <a href="#" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                <a href="#" class="remove"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                            </div>
+                                        </td>
+                                        <td class="product-price" data-title="Price">
+                                            <div class="price price-contain">
+                                                <ins><span class="price-amount"><span class="currencySymbol">₹</span>85.00</span></ins>
+                                                <del><span class="price-amount"><span class="currencySymbol">₹</span>95.00</span></del>
+                                            </div>
+                                        </td>
+                                        <td class="product-quantity" data-title="Quantity">
+                                            <div class="quantity-box type1">
+                                                <div class="qty-input">
+                                                    <input type="text" name="qty4" value="{{item.qty}}" data-max_value="4" data-min_value="1" data-step="1">
+                                                    <a href="#" class="qty-btn btn-up"><i class="fa fa-caret-up" aria-hidden="true"></i></a>
+                                                    <a href="#" class="qty-btn btn-down"><i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="product-subtotal" data-title="Total">
+                                            <div class="price price-contain">
+                                                <ins><span class="price-amount"><span class="currencySymbol">₹</span>85.00</span></ins>
+                                                <del><span class="price-amount"><span class="currencySymbol">₹</span>95.00</span></del>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="cart_item wrap-buttons">
+                                        <td class="wrap-btn-control" colspan="4">
+                                            <a href="{% url 'store:store_home' %}" class="btn back-to-shop">Back to Shop</a>
+                                            <button class="btn btn-update" type="submit" disabled>update</button>
+                                            <button class="btn btn-clear" type="reset">clear all</button>
+                                        </td>
+                                    </tr>
+                                    {% endcomment %}
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <div class="shpcart-subtotal-block">
+                                <div class="subtotal-line">
+                                    <b class="stt-name">Subtotal <span class="sub">(2ittems)</span></b>
+                                    <span id="basketsubtotal" class="stt-price">₹{{basket.get_subtotal_price}}</span>
+                                </div>
+                                <div class="subtotal-line">
+                                    <b class="stt-name">Shipping & Other Taxes.</b>
+                                    <span class="stt-price">₹11.50</span>
+                                </div>
+                                <div class="tax-fee">
+                                    <p class="title">Total Estaimate</p>
+                                    <p class="desc">Including all Taxes & Charges</p>
+                                    {% comment %}
+                                    <p class="desc">Based on 56789</p>
+                                    {% endcomment %}
+                                </div>
+                                <div class="subtotal-line">
+                                    <b class="stt-name">Total to Pay : <span class="sub"></span></b>
+                                    <span id="baskettotal" class="stt-price">₹{{basket.get_total_price}}</span>
+                                    <p class="desc">Including all Taxes & Charges</p>
+                                </div>
+                                <div class="btn-checkout">
+                                    <a href="#" class="btn checkout">Check out</a>
+                                </div>
+                                {% comment %}
+                                <div class="biolife-progress-bar">
+                                    <table>
+                                        <tr>
+                                            <td class="first-position">
+                                                <span class="index">₹0</span>
+                                            </td>
+                                            <td class="mid-position">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </td>
+                                            <td class="last-position">
+                                                <span class="index">₹99</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <p class="pickup-info"><b>Free Pickup</b> is available as soon as today More about shipping and pickup</p>
+                                {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% comment %}
+                <!--Related Product-->
+                <div class="product-related-box single-layout">
+                    <div class="biolife-title-box lg-margin-bottom-26px-im">
+                        <span class="biolife-icon icon-organic"></span>
+                        <span class="subtitle">All the best item for You</span>
+                        <h3 class="main-title">Related Products</h3>
+                    </div>
+                    <ul class="products-list biolife-carousel nav-center-02 nav-none-on-mobile" data-slick='{"rows":1,"arrows":true,"dots":false,"infinite":false,"speed":400,"slidesMargin":0,"slidesToShow":5, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 4}},{"breakpoint":992, "settings":{ "slidesToShow": 3, "slidesMargin":20}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":10}}]}'>
+                        <li class="product-item">
+                            <div class="contain-product layout-default">
+                                <div class="product-thumb">
+                                    <a href="#" class="link-to-product">
+                                        <img src="assets/images/products/p-13.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <b class="categories">Fresh Fruit</b>
+                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                    <div class="price ">
+                                        <ins><span class="price-amount"><span class="currencySymbol">₹</span>85.00</span></ins>
+                                        <del><span class="price-amount"><span class="currencySymbol">₹</span>95.00</span></del>
+                                    </div>
+                                    <div class="slide-down-box">
+                                        <p class="message">All products are carefully selected to ensure food safety.</p>
+                                        <div class="buttons">
+                                            <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                            <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="product-item">
+                            <div class="contain-product layout-default">
+                                <div class="product-thumb">
+                                    <a href="#" class="link-to-product">
+                                        <img src="assets/images/products/p-14.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <b class="categories">Fresh Fruit</b>
+                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                    <div class="price">
+                                        <ins><span class="price-amount"><span class="currencySymbol">₹</span>85.00</span></ins>
+                                        <del><span class="price-amount"><span class="currencySymbol">₹</span>95.00</span></del>
+                                    </div>
+                                    <div class="slide-down-box">
+                                        <p class="message">All products are carefully selected to ensure food safety.</p>
+                                        <div class="buttons">
+                                            <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                            <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="product-item">
+                            <div class="contain-product layout-default">
+                                <div class="product-thumb">
+                                    <a href="#" class="link-to-product">
+                                        <img src="assets/images/products/p-15.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <b class="categories">Fresh Fruit</b>
+                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                    <div class="price">
+                                        <ins><span class="price-amount"><span class="currencySymbol">₹</span>85.00</span></ins>
+                                        <del><span class="price-amount"><span class="currencySymbol">₹</span>95.00</span></del>
+                                    </div>
+                                    <div class="slide-down-box">
+                                        <p class="message">All products are carefully selected to ensure food safety.</p>
+                                        <div class="buttons">
+                                            <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                            <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="product-item">
+                            <div class="contain-product layout-default">
+                                <div class="product-thumb">
+                                    <a href="#" class="link-to-product">
+                                        <img src="assets/images/products/p-10.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <b class="categories">Fresh Fruit</b>
+                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                    <div class="price">
+                                        <ins><span class="price-amount"><span class="currencySymbol">₹</span>85.00</span></ins>
+                                        <del><span class="price-amount"><span class="currencySymbol">₹</span>95.00</span></del>
+                                    </div>
+                                    <div class="slide-down-box">
+                                        <p class="message">All products are carefully selected to ensure food safety.</p>
+                                        <div class="buttons">
+                                            <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                            <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="product-item">
+                            <div class="contain-product layout-default">
+                                <div class="product-thumb">
+                                    <a href="#" class="link-to-product">
+                                        <img src="assets/images/products/p-08.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <b class="categories">Fresh Fruit</b>
+                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                    <div class="price">
+                                        <ins><span class="price-amount"><span class="currencySymbol">₹</span>85.00</span></ins>
+                                        <del><span class="price-amount"><span class="currencySymbol">₹</span>95.00</span></del>
+                                    </div>
+                                    <div class="slide-down-box">
+                                        <p class="message">All products are carefully selected to ensure food safety.</p>
+                                        <div class="buttons">
+                                            <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                            <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="product-item">
+                            <div class="contain-product layout-default">
+                                <div class="product-thumb">
+                                    <a href="#" class="link-to-product">
+                                        <img src="assets/images/products/p-21.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <b class="categories">Fresh Fruit</b>
+                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                    <div class="price">
+                                        <ins><span class="price-amount"><span class="currencySymbol">₹</span>85.00</span></ins>
+                                        <del><span class="price-amount"><span class="currencySymbol">₹</span>95.00</span></del>
+                                    </div>
+                                    <div class="slide-down-box">
+                                        <p class="message">All products are carefully selected to ensure food safety.</p>
+                                        <div class="buttons">
+                                            <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                            <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="product-item">
+                            <div class="contain-product layout-default">
+                                <div class="product-thumb">
+                                    <a href="#" class="link-to-product">
+                                        <img src="assets/images/products/p-18.jpg" alt="dd" width="270" height="270" class="product-thumnail">
+                                    </a>
+                                </div>
+                                <div class="info">
+                                    <b class="categories">Fresh Fruit</b>
+                                    <h4 class="product-title"><a href="#" class="pr-name">National Fresh Fruit</a></h4>
+                                    <div class="price">
+                                        <ins><span class="price-amount"><span class="currencySymbol">₹</span>85.00</span></ins>
+                                        <del><span class="price-amount"><span class="currencySymbol">₹</span>95.00</span></del>
+                                    </div>
+                                    <div class="slide-down-box">
+                                        <p class="message">All products are carefully selected to ensure food safety.</p>
+                                        <div class="buttons">
+                                            <a href="#" class="btn wishlist-btn"><i class="fa fa-heart" aria-hidden="true"></i></a>
+                                            <a href="#" class="btn add-to-cart-btn"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>add to cart</a>
+                                            <a href="#" class="btn compare-btn"><i class="fa fa-random" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                {% endcomment %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %} 
+<script>
+    
+
+    // Delete Item
+    $(document).on("click", ".delete-button", function (e) {
+      e.preventDefault();
+      var prodid = $(this).data("index");
+      console.log(prodid)
+      $.ajax({
+        type: "POST",
+        url: '{% url "basket:basket_delete" %}',
+        data: {
+          productid: $(this).data("index"),
+          csrfmiddlewaretoken: "{{csrf_token}}",
+          action: "post",
+        },
+        success: function (json) {
+          $('.product-item[data-index="' + prodid + '"]').remove();
+  
+          if (json.qty == 0) {
+            total = 0
+            subtotal = 0
+          } else {
+            total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
+            subtotal = json.subtotal
+          }
+  
+          document.getElementById("basketsubtotal").innerHTML = subtotal;
+          document.getElementById("basket-qty").innerHTML = json.qty;
+          document.getElementById("baskettotal").innerHTML = total;
+        },
+        error: function (xhr, errmsg, err) {},
+      });
+    });
+  
+    // Update Item
+    $(document).on("click", ".update-button", function (e) {
+      e.preventDefault();
+      var prodid = $(this).data("index");
+      console.log(prodid)
+      $.ajax({
+        type: "POST",
+        url: '{% url "basket:basket_update" %}',
+        data: {
+          productid: $(this).data("index"),
+          productqty: $("#select"+ prodid + " option:selected").text(),
+          csrfmiddlewaretoken: "{{csrf_token}}",
+          action: "post",
+        },
+        success: function (json) {
+  
+          total = (parseFloat(json.subtotal) + 11.50).toFixed(2);
+          document.getElementById("basket-qty").innerHTML = json.qty;
+          document.getElementById("basketsubtotal").innerHTML = json.subtotal;
+          document.getElementById("baskettotal").innerHTML = total;
+        },
+        error: function (xhr, errmsg, err) {},
+      });
+    });
+
+    // document.getElementById("updateqty").style.visibility = "show";
+    $('.updateqty').show();
+  </script>
+{% endblock js %}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>{% load static %}
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %} | Whitefield Farm</title>
+
+    {% comment %}
+    {% if title  %}
+        <title>{{ title }} | InnerKomfort</title>
+    {% else %}
+        <title>InnerKomfort</title>
+    {% endif %}
+    {% if blog_keywords  %}
+        <meta name="keywords" content="Neurosoftech, Web Development Comapny, Website Designing Agency, Lead Generation Company, Digital Marketing agency, SEO Agency, Social Media Marketing Agency, Google Ads management, Facebook Ads Agency, content marketing agency, ppc marketing agency" /> 
+        <meta name="keywords" content="#" />
+    {% endif %}
+    {% if blog_description  %}
+        <meta name="description" content="NeurosofTech commits Powerfull Digital Solutions For All your COrporate Requirements and All in One Marketing Agency." />
+        <meta name="description" content="#" /> 
+    {% endif %}
+    {% endcomment %}
+
+    <meta name="author" content="Yuvraj Limbole" />
+
+    <link href="https://fonts.googleapis.com/css?family=Cairo:400,600,700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400i,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&amp;display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slick.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main-color.css' %}">
+    {% block style %}{% endblock style %}
+</head>
+
+<body class="biolife-body">
+
+    <!-- Preloader -->
+    {% comment %}
+    <div id="biof-loading">
+        <div class="biof-loading-center">
+            <div class="biof-loading-center-absolute">
+                <div class="dot dot-one"></div>
+                <div class="dot dot-two"></div>
+                <div class="dot dot-three"></div>
+            </div>
+        </div>
+    </div>
+    {% endcomment %}
+
+    <!-- HEADER -->
+    {% include 'frontend/header.html' %}
+    <!-- HEADER END -->
+
+    <!-- Page Contain -->
+    <div class="page-contain">
+
+        <!-- Main content -->
+        <div id="main-content" class="main-content">
+
+            {% block content %}{% endblock content %}
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    {% include 'frontend/footer.html' %}
+
+    <!--Footer For Mobile-->
+    <div class="mobile-footer">
+        <div class="mobile-footer-inner">
+            <div class="mobile-block block-menu-main">
+                <a class="menu-bar menu-toggle btn-toggle" data-object="open-mobile-menu" href="javascript:void(0)">
+                    <span class="fa fa-bars"></span>
+                    <span class="text">Menu</span>
+                </a>    
+            </div>
+            <div class="mobile-block block-sidebar">
+                <a class="menu-bar filter-toggle btn-toggle" data-object="open-mobile-filter" href="javascript:void(0)">
+                    <i class="fa fa-sliders" aria-hidden="true"></i>
+                    <span class="text">Shop</span>
+                </a>
+            </div>
+            <div class="mobile-block block-minicart">
+                <a class="link-to-cart" href="#">
+                    <span class="fa fa-shopping-bag" aria-hidden="true"></span>
+                    <span class="text">Cart</span>
+                </a>
+            </div> 
+            <div class="mobile-block block-global">
+                <a class="menu-bar myaccount-toggle btn-toggle" data-object="global-panel-opened" href="javascript:void(0)">
+                    <span class="fa fa-globe"></span>
+                    <span class="text">Accounts</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!--Footer For Mobile End-->
+    <!-- FOOTER End -->
+
+    <!--Mobile Global Menu-->
+    {% include 'frontend/mobileglobal.html' %}
+    <!--Mobile Global Menu End-->
+
+    <!--Quickview Popup-->
+    {% include 'frontend/quickview-popup.html' %}
+    <!--Quickview Popup End-->
+
+    <!-- Scroll Top Button -->
+    <a class="btn-scroll-top"><i class="biolife-icon icon-left-arrow"></i></a> {% include 'frontend/allJS.html' %} {% block js %}{{% endblock js %}
+</body>
+
+</html>
